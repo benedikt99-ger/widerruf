@@ -1,8 +1,8 @@
 <?php
 
-namespace benedikt99\afterbuy;
+namespace benedikt99\widerruf;
 
 class Module
 {
-    public const MODULE_ID = 'afterbuy';
+    public const MODULE_ID = 'widerruf';
 }
