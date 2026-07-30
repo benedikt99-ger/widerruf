@@ -21,7 +21,7 @@
 	],
 	"require": {
 		"benedikt99-ger/widerruf": "^1.0"
-	}	
+	},
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require-dev": {
