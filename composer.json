@@ -19,6 +19,9 @@
             "url": "https://github.com/benedikt99-ger/widerruf"
         }
     ],
+	"replace": {
+		"doctrine/reflection": "*"
+	}	
     "conflict": {
         "oxid-esales/oxideshop-ce": "<7.4"
     },
