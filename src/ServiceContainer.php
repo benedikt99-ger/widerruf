@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace nuenemann\AfterbuyExport;
+namespace nuenemann\widerruf;
 
 use OxidEsales\EshopCommunity\Internal\Container\ContainerFactory;
 use Symfony\Component\DependencyInjection\Exception\ServiceNotFoundException;
