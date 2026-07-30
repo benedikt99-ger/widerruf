@@ -25,9 +25,9 @@ $aModule = [
         'ordertracking'    => \nuenemann\widerruf\Controller\Admin\OrderTrackingController::class,
     ],	
     'templates' => [
-        'withdrawalform.tpl' => 'nuenemann/widerruf/Application/views/widerrufform.tpl',
-        'withdrawalEmailHtml.tpl' => 'nuenemann/widerruf/Application/views/widerrufEmailHtml.tpl',
-        'withdrawalEmailPlain.tpl' => 'nuenemann/widerruf/Application/views/widerrufEmailPlain.tpl'
+        'withdrawalform.twig' => 'nuenemann/widerruf/Application/views/widerrufform.twig',
+        'withdrawalEmailHtml.twig' => 'nuenemann/widerruf/Application/views/widerrufEmailHtml.twig',
+        'withdrawalEmailPlain.twig' => 'nuenemann/widerruf/Application/views/widerrufEmailPlain.twig'
     ],	
    'settings' => [
         [
