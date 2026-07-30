@@ -19,10 +19,10 @@ $aModule = [
     'email'       => 'benedikt@nuenemann.de',
 	'extend' => [
 		\OxidEsales\Eshop\Application\Model\Order::class => \nuenemann\widerruf\Model\Order::class,
+		\OxidEsales\Eshop\Core\Email::class => \nuenemann\widerruf\Application\Extend\Email::class
 	],
     'controllers' => [
         'OrderController'  => \nuenemann\widerruf\Controller\Admin\WiderrufController::class,
-        'ordertracking'    => \nuenemann\widerruf\Controller\Admin\OrderTrackingController::class,
     ],	
     'templates' => [
         'withdrawalform.twig' => 'nuenemann/widerruf/Application/views/widerrufform.twig',
