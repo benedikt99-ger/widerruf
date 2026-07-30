@@ -1,6 +1,6 @@
 <?php
 
-namespace benedikt99\widerruf;
+namespace nuenemann\widerruf;
 
 class Module
 {
