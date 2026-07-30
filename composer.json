@@ -21,7 +21,7 @@
     ],
 	"replace": {
 		"doctrine/reflection": "*"
-	}	
+	},
     "conflict": {
         "oxid-esales/oxideshop-ce": "<7.4"
     },
