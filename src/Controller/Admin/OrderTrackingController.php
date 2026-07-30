@@ -7,9 +7,9 @@
 
 declare(strict_types=1);
 
-namespace nuenemann\AfterbuyExport\Controller\Admin;
+namespace nuenemann\widerruf\Controller\Admin;
 
-use nuenemann\AfterbuyExport\ServiceContainer;
+use nuenemann\widerruf\ServiceContainer;
 use OxidEsales\Eshop\Application\Model\Order as EshopOrder;
 use OxidEsales\Eshop\Core\Registry as EshopRegistry;
 use OxidEsales\Eshop\Application\Controller\Admin\AdminController;
