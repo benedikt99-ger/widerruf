@@ -1,0 +1,49 @@
+{% set shop		=oEmailView.getShop()  %}
+{% set user		=oEmailView.getUser()  %}
+
+{% capture name="content"  %}
+--- Kunde ---
+{%  $wdf.name  %}
+{%  $wdf.street  %}
+{%  $wdf.zipcity  %}
+{%  $wdf.country  %}
+{% if $oUser && $toOwner  %}
+Shop-Kundennummer: {% $oUser.oxuser__oxcustnr.value  %}
+{% if $oUser.oxuser__oxusername.value !== $wdf.email   %}Shop-Email-Adresse: {% $oUser.oxuser__oxusername.value  %}<br/>{% endif %}
+{% endif %}
+
+{% if $oOrder  %}
+{% set oPaymentType=oOrder.getPaymentType()  %}
+Bestellung Nr./Datum:  {% $oOrder.oxorder__oxordernr.value  %} vom {% $oOrder.oxorder__oxorderdate.value  %}
+Zahlungsart: {% $oPaymentType.oxpayments__oxdesc.value  %}
+{% else  %}
+Bestellung Nr./Datum: {% $wdf.order  %}
+{% endif %}
+
+{% for _product in wdf.products %}
+{% if $_product.return === "1"   %}
+. {% $_product.title  %}
+Gründe: {% for _reason in _product.reasons %}{% if $_reason !== ""  %}{% $_reason  %}, {% endif %}{% endfor %}
+{% endif %}
+{% endfor %}
+{% endcapture  %}
+{% if $toUser  %}
+
+Sehr geehre/-r {% $wdf.name  %},
+Sie haben soeben den folgenden Antrag auf Widerruf gestellt:
+
+{% $smarty.capture.content  %}
+
+{% if $retoureportal  %}
+Bitte nutzen Sie den folgenden Link für die Erstellung eines Versandaufklebers:
+{% $retoureportal  %}
+Der Versand ist für Sie kostenlos.
+{% endif %}
+
+{% oxcontent ident="withdrawalemailendplain"  %}
+{% else  %}
+Hallo,
+soeben wurde im {% shop.oxshops__oxname.value  %} Shop folgender Antrag auf Widerruf gestellt:
+
+{% $smarty.capture.content  %}
+{% endif %}
