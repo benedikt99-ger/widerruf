@@ -18,7 +18,7 @@ use OxidEsales\Eshop\Application\Controller\FrontendController;
 class WiderrufController extends FrontendController
 {
 
-   protected $_sThisTemplate = 'withdrawalform.tpl';
+   protected $_sThisTemplate = 'widerrufform.twig';
 
     public function getTitle()
     {
