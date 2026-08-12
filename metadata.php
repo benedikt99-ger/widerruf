@@ -22,7 +22,7 @@ $aModule = [
 		\OxidEsales\Eshop\Core\Email::class => \nuenemann\widerruf\Application\Extend\Email::class
 	],
     'controllers' => [
-        'OrderController'  => \nuenemann\widerruf\Controller\WiderrufController::class,
+        'withdrawalform'  => \nuenemann\widerruf\Controller\WiderrufController::class,
     ],	
     'templates' => [
         'withdrawalform.twig' => 'nuenemann/widerruf/Application/views/widerrufform.twig',
