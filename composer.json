@@ -19,6 +19,11 @@
             "url": "https://github.com/benedikt99-ger/widerruf"
         }
     ],
+	"extra": {
+    	"oxideshop": {
+        	"target-directory": "nuenemann/widerruf"
+    	}
+	},
     "conflict": {
         "oxid-esales/oxideshop-ce": "<7.4"
     },
