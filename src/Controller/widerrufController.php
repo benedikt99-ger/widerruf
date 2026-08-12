@@ -38,7 +38,7 @@ class widerrufController extends FrontendController
     }
 
     public function isLegacyBS() {
-        return (Registry::getConfig()->getConfigParam('vtWithdrawalBootstrapVersion') == "v3");
+        return (Registry::getConfig()->getConfigParam('WiderrufBootstrapVersion') == "v3");
     }
 
     public function getUserOrders()
@@ -77,13 +77,13 @@ class widerrufController extends FrontendController
     }
     public function getWithdrawalReasons()
     {
-        $aReasonst = Registry::getConfig()->getConfigParam('vtWithdrawalReasons');
+        $aReasonst = Registry::getConfig()->getConfigParam('WiderrufReasons');
         return (!empty($aReasonst) ? $aReasonst : false);
     }
 
     public function getRecaptchaSiteKey()
     {
-        return Registry::getConfig()->getConfigParam('vtWithdrawalSitekey');
+        return Registry::getConfig()->getConfigParam('WiderrufSitekey');
     }
     protected function _checkRecaptcha($token)
     {
@@ -103,7 +103,7 @@ class widerrufController extends FrontendController
         }
 
         $data = [
-            'secret' => Registry::getConfig()->getConfigParam("vtWithdrawalSecret"),
+            'secret' => Registry::getConfig()->getConfigParam("WiderrufSecret"),
             'response' => $token,
             'remoteip' => $ip
         ];
