@@ -22,7 +22,8 @@ class WiderrufController extends FrontendController
 
     public function getTitle()
     {
-        return Registry::getLang()->translateString("WITHDRAWAL_FORM", Registry::getLang()->getBaseLanguage(), false);
+		// 2026bene todo neuer titel
+        return Registry::getLang()->translateString("CONTACT", Registry::getLang()->getBaseLanguage(), false);
     }
 
     public function getBreadCrumb()
