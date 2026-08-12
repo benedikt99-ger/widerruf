@@ -25,9 +25,9 @@ $aModule = [
         'withdrawalform'  => \nuenemann\widerruf\Controller\WiderrufController::class,
     ],	
     'templates' => [
-        'widerrufform.twig' => 'nuenemann/widerruf/Application/views/widerrufform.twig',
-        'widerrufEmailHtml.twig' => 'nuenemann/widerruf/Application/views/widerrufEmailHtml.twig',
-        'widerrufEmailPlain.twig' => 'nuenemann/widerruf/Application/views/widerrufEmailPlain.twig'
+        'widerrufform.twig' => 'nuenemann/widerruf/src/Application/views/widerrufform.twig',
+        'widerrufEmailHtml.twig' => 'nuenemann/widerruf/src/Application/views/widerrufEmailHtml.twig',
+        'widerrufEmailPlain.twig' => 'nuenemann/widerruf/src/Application/views/widerrufEmailPlain.twig'
     ],	
    'settings' => [
         [
