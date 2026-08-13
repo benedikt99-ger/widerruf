@@ -18,7 +18,6 @@ $aModule = [
     'url'         => 'https://github.com/benedikt99-ger/widerruf',
     'email'       => 'benedikt@nuenemann.de',
 	'extend' => [
-		\OxidEsales\Eshop\Application\Model\Order::class => \nuenemann\widerruf\Model\Order::class,
 		\OxidEsales\Eshop\Core\Email::class => \nuenemann\widerruf\Application\Extend\Email::class
 	],
     'controllers' => [
