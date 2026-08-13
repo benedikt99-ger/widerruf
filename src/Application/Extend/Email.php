@@ -7,13 +7,13 @@ use OxidEsales\EshopCommunity\Internal\Framework\Templating\TemplateRendererBrid
 
 class Email extends Email_parent
 {
-    protected $_sWithdrawalEmailTemplateHtml = "widerrufEmailHtml.twig";
-    protected $_sWithdrawalEmailTemplatePlain = "widerrufEmailPlain.twig";
+    protected $_sWithdrawalEmailTemplateHtml = "@widerruf/widerrufEmailHtml.html.twig";
+    protected $_sWithdrawalEmailTemplatePlain = "@widerruf/widerrufEmailPlain.html.twig";
 
     protected function sendWithdrawalRequest($wdf, $toUser = false)
     {
-        $oShop = $this->_getShop();
-        $this->_setMailParams($oShop);
+        $oShop = $this->getShop();
+        $this->setMailParams($oShop);
 
         if ($toUser) {
             $this->setViewData("toUser", true);
@@ -55,24 +55,17 @@ class Email extends Email_parent
             }
         }
         $this->setViewData("retoureportal", Registry::getConfig()->getConfigParam("WiderrufRetoureportal"));
-        $this->_processViewArray();
+        $this->processViewArray();
 
-        $sShopVersion = \OxidEsales\EshopCommunity\Core\ShopVersion::getVersion();
-        if( version_compare($sShopVersion,"6.2.0") < 0) { // old
-            $smarty = $this->_getSmarty();
+		// siehe \vendor\oxid-esales\oxideshop-ce\source\Core
+		$renderer = $this->getRenderer();// private...
+		// $bridge = $this->getContainer()->get(TemplateRendererBridgeInterface::class);
+		// $bridge->setEngine($this->_getSmarty());
+		// $renderer = $bridge->getTemplateRenderer();
 
-            $this->setBody($smarty->fetch($this->_sWithdrawalEmailTemplateHtml));
-            $this->setAltBody($smarty->fetch($this->_sWithdrawalEmailTemplatePlain));
-        }
-        else { // new
-            //$renderer = $this->getRenderer(); // private...
-            $bridge = $this->getContainer()->get(TemplateRendererBridgeInterface::class);
-            $bridge->setEngine($this->_getSmarty());
-            $renderer = $bridge->getTemplateRenderer();
+		$this->setBody($renderer->renderTemplate($this->_sWithdrawalEmailTemplateHtml, $this->getViewData()));
+		$this->setAltBody($renderer->renderTemplate($this->_sWithdrawalEmailTemplatePlain, $this->getViewData()));
 
-            $this->setBody($renderer->renderTemplate($this->_sWithdrawalEmailTemplateHtml, $this->getViewData()));
-            $this->setAltBody($renderer->renderTemplate($this->_sWithdrawalEmailTemplatePlain, $this->getViewData()));
-        };
 
 
 
