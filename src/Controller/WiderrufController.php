@@ -19,6 +19,8 @@ class WiderrufController extends FrontendController
 {
 
    protected $_sThisTemplate = '@widerruf/widerrufform.html.twig';
+   
+   protected $_isAjax = 0;
 
     public function getTitle()
     {
@@ -36,10 +38,6 @@ class WiderrufController extends FrontendController
         $aPaths[] = $aPath;
 
         return $aPaths;
-    }
-
-    public function isLegacyBS() {
-        return (Registry::getConfig()->getConfigParam('WiderrufBootstrapVersion') == "v3");
     }
 
     public function getUserOrders()
@@ -60,9 +58,31 @@ class WiderrufController extends FrontendController
         }
         return false;
     }
-    
+
+	// Neue Funktion
+	/* in TWIG dann:
+	{% if getWdfPostValue('name') %}
+		{{ getWdfPostValue('name') }}
+	{% elseif oxcmp_user %}
+		{{ oxcmp_user.oxuser__oxfname.value }} {{ oxcmp_user.oxuser__oxlname.value }}
+	{% endif %}
+	*/	
+	public function getWdfPostValue(string $key)
+	{
+		$wdf = \OxidEsales\Eshop\Core\Registry::getRequest()->getRequestEscapedParameter('wdf');
+		return $wdf[$key] ?? null;
+	}
+
+    public function isAjax()
+    {
+		return $this->_isAjax;
+	}
+
     public function getOrderArticles()
     {
+		// 
+		$this->_isAjax = Registry::getRequest()->getRequestEscapedParameter('ajax');
+		
         $wdf = Registry::getRequest()->getRequestEscapedParameter("wdf");
         if (!empty($wdf["oxorderid"])) {
             $oArticleList = oxNew(\OxidEsales\Eshop\Application\Model\ArticleList::class);
@@ -150,6 +170,10 @@ class WiderrufController extends FrontendController
         try {
             /** @var oxEmail $oEmail */
             $oEmail = oxNew("oxEmail");
+			
+			$sLogfile = Registry::getConfig()->getLogsDir() .'bn.log';
+			file_put_contents($sLogfile, trim(date('Y-m-d H:i:s')." submitWithdrawal $wdf->name ".$wdf->name).PHP_EOL,FILE_APPEND);
+			
             $x = $oEmail->sendWithdrawalRequestToOwner($wdf);
             $y = $oEmail->sendWithdrawalRequestToUser($wdf);
         } catch (Exception $oException) {
