@@ -40,7 +40,7 @@ Bitte nutzen Sie den folgenden Link für die Erstellung eines Versandaufklebers:
 Der Versand ist für Sie kostenlos.
 {% endif %}
 
-{% oxcontent ident="withdrawalemailendplain"  %}
+{% include_content 'withdrawalemailendplain' %}
 {% else  %}
 Hallo,
 soeben wurde im {{ shop.oxshops__oxname.value  }} Shop folgender Antrag auf Widerruf gestellt:
