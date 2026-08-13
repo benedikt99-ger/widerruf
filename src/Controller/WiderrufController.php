@@ -23,7 +23,7 @@ class WiderrufController extends FrontendController
     public function getTitle()
     {
 		// 2026bene todo neuer titel
-        return Registry::getLang()->translateString("CONTACT", Registry::getLang()->getBaseLanguage(), false);
+        return Registry::getLang()->translateString("WITHDRAWAL_FORM", Registry::getLang()->getBaseLanguage(), false);
     }
 
     public function getBreadCrumb()
@@ -63,7 +63,7 @@ class WiderrufController extends FrontendController
     
     public function getOrderArticles()
     {
-        $wdf = Registry::getConfig()->getRequestParameter("wdf");
+        $wdf = Registry::getRequest()->getRequestEscapedParameter("wdf");
         if (!empty($wdf["oxorderid"])) {
             $oArticleList = oxNew(\OxidEsales\Eshop\Application\Model\ArticleList::class);
             $oArticleList->init('oxorderarticle');
@@ -135,16 +135,17 @@ class WiderrufController extends FrontendController
 
     public function submitWithdrawal()
     {
-        $wdf = Registry::getConfig()->getRequestParameter("wdf");
+        $wdf = Registry::getRequest()->getRequestEscapedParameter("wdf");
 
         if($wdf["datenschutz"] !== "1") {
             $this->addTplParam("submitError", "DATENSCHUTZ");
             return false;
         };
 
-        if (!Registry::getConfig()->getUser() && !$this->_checkRecaptcha(Registry::getConfig()->getRequestParameter("g-recaptcha-response"))) {
-            return;
-        }
+		// 2026bene kein _checkRecaptcha
+        // if (!Registry::getConfig()->getUser() && !$this->_checkRecaptcha(Registry::getRequest()->getRequestEscapedParameter("g-recaptcha-response"))) {
+        //     return;
+        // }
 
         try {
             /** @var oxEmail $oEmail */
