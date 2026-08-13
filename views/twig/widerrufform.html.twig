@@ -68,7 +68,7 @@
 							<input type="text" class="form-control" id="wdfcountry" name="wdf[country]" required value="{{ _country.oxcountry__oxtitle.value  }}" readonly autocomplete="shipping country-name">
 							{% endfor %}
 						{% else  %}
-							<select name="wdf[country]" class="{% if oldBS  %}form-control{% else  %}custom-select{% endif %}" required>
+							<select name="wdf[country]" class="form-select" required>
 								<option>Wählen Sie Ihr Land</option>
 								{% for _country in oViewConf.getCountryList() %}
 									<option id="wdfcountry_{{ _country.oxcountry__oxid.value  }}" value="{{ _country.oxcountry__oxtitle.value  }}"
@@ -80,7 +80,7 @@
 								{% endfor %}
 							</select>
 						{% endif %}
-                        <label class="{% if oldBS  %}control{% else  %}col-form{% endif %}-label col-sm-5 col-md-4 text-right">{{ translate({ ident: "COUNTRY"  }) }} <b>*</b></label>
+                        <label class=" req">{{ translate({ ident: "COUNTRY"  }) }} <b>*</b></label>
                     </div> {# Land #}
                     <div class="mb-3 form-floating">
                         <input type="email" class="form-control" id="wdfemail" name="wdf[email]" required autocomplete="email"
