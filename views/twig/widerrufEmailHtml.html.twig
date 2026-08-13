@@ -2,7 +2,7 @@
 {% set oViewConf=oEmailView.getViewConfig()  %}
 {% set user		=oEmailView.getUser()  %}
 
-{% capture name="content"  %}
+{% set mailcontent  %}
     <p>
         <b>Kunde:</b><br/>
         {{  wdf.name  }}<br/>
@@ -42,7 +42,7 @@
             </p>
         {% endif %}
     {% endfor %}
-{% endcapture  %}
+{% endset  %}
 
 {% if toUser  %}
 	{% include "email/html/header.html.twig" with {title: ""} %}
@@ -53,7 +53,7 @@
                     <h3>Sehr geehre/-r {{ wdf.name  }},</h3>
                     <p>Sie haben soeben den folgenden Antrag auf Widerruf gestellt:</p>
 
-                    {{ smarty.capture.content  }}
+                    {{ mailcontent  }}
 
                     {% if retoureportal  %}
                         <p>
@@ -76,5 +76,5 @@
     <h3>Hallo, </h3>
     <p>soeben wurde im {{ shop.oxshops__oxname.value  }} Shop folgender Antrag auf Widerruf gestellt:</p>
 
-    {{ smarty.capture.content  }}
+    {{ mailcontent  }}
 {% endif %}

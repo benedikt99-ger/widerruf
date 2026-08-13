@@ -1,7 +1,7 @@
 {% set shop		=oEmailView.getShop()  %}
 {% set user		=oEmailView.getUser()  %}
 
-{% capture name="content"  %}
+{% set mailcontent  %}
 --- Kunde ---
 {{  wdf.name  }}
 {{  wdf.street  }}
@@ -26,13 +26,13 @@ Bestellung Nr./Datum: {{ wdf.order  }}
 Gründe: {% for _reason in _product.reasons %}{% if _reason != ""  %}{{ _reason  }}, {% endif %}{% endfor %}
 {% endif %}
 {% endfor %}
-{% endcapture  %}
+{% endset  %}
 {% if toUser  %}
 
 Sehr geehre/-r {{ wdf.name  }},
 Sie haben soeben den folgenden Antrag auf Widerruf gestellt:
 
-{{ smarty.capture.content  }}
+{{ mailcontent  }}
 
 {% if retoureportal  %}
 Bitte nutzen Sie den folgenden Link für die Erstellung eines Versandaufklebers:
@@ -45,5 +45,5 @@ Der Versand ist für Sie kostenlos.
 Hallo,
 soeben wurde im {{ shop.oxshops__oxname.value  }} Shop folgender Antrag auf Widerruf gestellt:
 
-{{ smarty.capture.content  }}
+{{ mailcontent  }}
 {% endif %}
