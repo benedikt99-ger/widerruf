@@ -1,5 +1,4 @@
 {% capture append="oxidBlock_content"  %}
-    {% set oldBS=oView.isLegacyBS()  %}
 
     {% set template_title=oView.getTitle()  %}
 	<div class="container-xxl">
@@ -38,7 +37,7 @@
 								   {{ oxcmp_user.oxuser__oxfname.value }}
 								   {{ oxcmp_user.oxuser__oxlname.value }}
 								   {% endif %}">
-                        <label for="wdfname" class="{% if oldBS  %}control{% else  %}col-form{% endif %}-label col-sm-5 col-md-4 text-right">{{ translate({ ident: "FIRST_NAME"  }) }}
+                        <label for="wdfname" class="">{{ translate({ ident: "FIRST_NAME"  }) }}
                             , {{ translate({ ident: "LAST_NAME"  }) }} <b>*</b></label>
 
                     </div> {# NAME #}
@@ -50,7 +49,7 @@
 								   {{ oxcmp_user.oxuser__oxstreet.value  }}
 								   {{ oxcmp_user.oxuser__oxstreetnr.value  }}
 								   {% endif %}">
-                        <label for="wdfemail" class="{% if oldBS  %}control{% else  %}col-form{% endif %}-label col-sm-5 col-md-4 text-right">{{ translate({ ident: "STREET_AND_STREETNO"  }) }} <b>*</b></label>
+                        <label for="wdfemail" class="">{{ translate({ ident: "STREET_AND_STREETNO"  }) }} <b>*</b></label>
                     </div> {# STRASSE #}
                     <div class="mb-3 form-floating">
                         <input type="text" class="form-control" id="wdfzipcity" name="wdf[zipcity]" required autocomplete="shipping postal-code address-level2"
@@ -60,7 +59,7 @@
 								   {{ oxcmp_user.oxuser__oxzip.value  }}
 								   {{ oxcmp_user.oxuser__oxcity.value  }}
 								   {% endif %}">
-                        <label for="wdfemail" class="{% if oldBS  %}control{% else  %}col-form{% endif %}-label col-sm-5 col-md-4 text-right">{{ translate({ ident: "POSTAL_CODE_AND_CITY"  }) }} <b>*</b></label>
+                        <label for="wdfemail" class="">{{ translate({ ident: "POSTAL_CODE_AND_CITY"  }) }} <b>*</b></label>
                     </div> {# PLZ ORT #}
                     <div class="mb-3 form-floating">
 						{% if oViewConf.getCountryList()|length == 1  %}
@@ -80,12 +79,12 @@
 								{% endfor %}
 							</select>
 						{% endif %}
-                        <label class=" req">{{ translate({ ident: "COUNTRY"  }) }} <b>*</b></label>
+                        <label class="">{{ translate({ ident: "COUNTRY"  }) }} <b>*</b></label>
                     </div> {# Land #}
                     <div class="mb-3 form-floating">
                         <input type="email" class="form-control" id="wdfemail" name="wdf[email]" required autocomplete="email"
                                    value="{{ smarty.post.wdf.email|default(oxcmp_user.oxuser__oxusername.value)  }}">
-                        <label for="wdfemail" class="{% if oldBS  %}control{% else  %}col-form{% endif %}-label col-sm-5 col-md-4 text-right">{{ translate({ ident: "EMAIL_ADDRESS"  }) }} <b>*</b></label>
+                        <label for="wdfemail" class="">{{ translate({ ident: "EMAIL_ADDRESS"  }) }} <b>*</b></label>
                     </div> {# Email #}
                     <div class="mb-3 form-floating">
 						{% if not oView.getUserOrders()  %}
@@ -100,7 +99,7 @@
 								{% endfor %}
 							</select>
 						{% endif %}
-                        <label for="wdforder" class="{% if oldBS  %}control{% else  %}col-form{% endif %}-label col-sm-5 col-md-4 text-right">
+                        <label for="wdforder" class="">
                             {{ translate({ ident: "PAGE_TITLE_ORDER"  }) }}
                             {% if not oView.getUserOrders()  %}
 								{{ translate({ ident: "NUMBER_2"  }) }} & {{ translate({ ident: "DATE"  }) }}
@@ -183,7 +182,7 @@
                     {% if ( oView.getUserOrders() and smarty.post.wdf.oxorderid ) or not oView.getUserOrders()   %}
                         <div class="row justify-content-md-center pt-5" id="submitError">
                             {% if submitError  %}
-                                <div class="col-12 col-md-10 {% if oldBS  %}col-md-push-1{% endif %}">
+                                <div class="">
                                     <div class="alert alert-danger">
                                         {{ translate({ ident: "WITHDRAWAL_ERROR_" ~ submitError, args: errorArgs   }) }}
                                     </div>
