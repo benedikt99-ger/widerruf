@@ -55,10 +55,6 @@ $aModule = [
         [
             'group' => 'WiderrufMain','name' => 'WiderrufRetoureportal',
             'type' => 'str','value' => '','position' => 5
-        ],
-        [
-            'group' => 'WiderrufMain','name' => 'WiderrufBootstrapVersion',
-            'type' => 'select','value' => 'v3','constraints' => 'v3|v4','position' => 6
         ]
     ]
 ];
