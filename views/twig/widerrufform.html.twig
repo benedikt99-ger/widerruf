@@ -1,9 +1,45 @@
 {% capture append="oxidBlock_content"  %}
 
     {% set template_title=oView.getTitle()  %}
+	
+	{% set isAjaxCall=oView.isAjax()  %}
+ 	{% set wdfname=oView.getWdfPostValue('name')  %}
+	{% set wdfstreet=oView.getWdfPostValue('street')  %}
+	{% set wdfzipcity=oView.getWdfPostValue('zipcity')  %}
+	{% set wdfcountry=oView.getWdfPostValue('country')  %}
+	{% set wdfemail=oView.getWdfPostValue('email')  %}
+	{% set oxorderid=oView.getWdfPostValue('oxorderid')  %}
+	{% set wdfdatenschutz=oView.getWdfPostValue('datenschutz')  %}
+	
 	<div class="container-xxl" id="content">
 		<div class="row bg-white p-4 m-4" >
 		<h1 class="page-header">{{ template_title  }}</h1>
+{#		Debug
+
+		isAjax {{ isAjaxCall }}
+		Name {% if oView.getWdfPostValue('name') %}
+			{{ wdfname }}
+		{% endif %}
+		street	{% if oView.getWdfPostValue('street') %}
+			{{ wdfstreet }}
+		{% endif %}		
+		zipcity	{% if oView.getWdfPostValue('zipcity') %}
+			{{ wdfzipcity }}
+		{% endif %}		
+		country	{% if oView.getWdfPostValue('country') %}
+			{{ wdfcountry }}
+		{% endif %}			
+		email{% if oView.getWdfPostValue('email') %}
+			{{ wdfemail }}
+		{% endif %}			
+		<br>orderid	{% if oView.getWdfPostValue('oxorderid') %}
+			{{ oxorderid }}
+		{% endif %}		
+		datenschutz	{% if oView.getWdfPostValue('datenschutz') %}
+			{{ wdfdatenschutz }}
+		{% endif %}	
+#}		
+
 		
 		<form class="form-horizontal" action="{{ oViewConf.getSslSelfLink() }}" method="post" role="form" id="wdf">
         <div class="hidden">
@@ -31,8 +67,8 @@
 
                     <div class="mb-3 form-floating">
                             <input type="text" class="form-control" id="wdfname" name="wdf[name]" required autocomplete="shipping name"
-                                   value="{% if smarty.post.wdf.name  %}
-								   {{ smarty.post.wdf.name  }}
+                                   value="{% if wdfname  %}
+								   {{ wdfname  }}
 								   {% elseif oxcmp_user  %}
 								   {{ oxcmp_user.oxuser__oxfname.value }}
 								   {{ oxcmp_user.oxuser__oxlname.value }}
@@ -43,23 +79,23 @@
                     </div> {# NAME #}
                     <div class="mb-3 form-floating">
                          <input type="text" class="form-control" id="wdfstreet" name="wdf[street]" required autocomplete="shipping street-address"
-                                   value="{% if smarty.post.wdf.street  %}
-								   {{ smarty.post.wdf.street  }}
+                                   value="{% if wdfstreet  %}
+								   {{ wdfstreet  }}
 								   {% elseif oxcmp_user  %}
 								   {{ oxcmp_user.oxuser__oxstreet.value  }}
 								   {{ oxcmp_user.oxuser__oxstreetnr.value  }}
 								   {% endif %}">
-                        <label for="wdfemail" class="">{{ translate({ ident: "STREET_AND_STREETNO"  }) }} <b>*</b></label>
+                        <label for="wdfstreet" class="">{{ translate({ ident: "STREET_AND_STREETNO"  }) }} <b>*</b></label>
                     </div> {# STRASSE #}
                     <div class="mb-3 form-floating">
                         <input type="text" class="form-control" id="wdfzipcity" name="wdf[zipcity]" required autocomplete="shipping postal-code address-level2"
-                                   value="{% if smarty.post.wdf.zipcity  %}
-								   {{ smarty.post.wdf.zipcity  }}
+                                   value="{% if wdfzipcity  %}
+								   {{ wdfzipcity  }}
 								   {% elseif oxcmp_user  %}
 								   {{ oxcmp_user.oxuser__oxzip.value  }}
 								   {{ oxcmp_user.oxuser__oxcity.value  }}
 								   {% endif %}">
-                        <label for="wdfemail" class="">{{ translate({ ident: "POSTAL_CODE_AND_CITY"  }) }} <b>*</b></label>
+                        <label for="wdfzipcity" class="">{{ translate({ ident: "POSTAL_CODE_AND_CITY"  }) }} <b>*</b></label>
                     </div> {# PLZ ORT #}
                     <div class="mb-3 form-floating">
 						{% if oViewConf.getCountryList()|length == 1  %}
@@ -71,7 +107,7 @@
 								<option>Wählen Sie Ihr Land</option>
 								{% for _country in oViewConf.getCountryList() %}
 									<option id="wdfcountry_{{ _country.oxcountry__oxid.value  }}" value="{{ _country.oxcountry__oxtitle.value  }}"
-											{% if smarty.post.wdf.country == _country.oxcountry__oxtitle.value or oxcmp_user.oxuser__oxcountryid.value == _country.oxcountry__oxid.value   %}
+											{% if wdfcountry == _country.oxcountry__oxtitle.value or oxcmp_user.oxuser__oxcountryid.value == _country.oxcountry__oxid.value   %}
 											selected
 											{% endif %}>
 										{{ _country.oxcountry__oxtitle.value  }}
@@ -83,17 +119,17 @@
                     </div> {# Land #}
                     <div class="mb-3 form-floating">
                         <input type="email" class="form-control" id="wdfemail" name="wdf[email]" required autocomplete="email"
-                                   value="{{ smarty.post.wdf.email|default(oxcmp_user.oxuser__oxusername.value)  }}">
+                                   value="{{ wdfemail|default(oxcmp_user.oxuser__oxusername.value)  }}">
                         <label for="wdfemail" class="">{{ translate({ ident: "EMAIL_ADDRESS"  }) }} <b>*</b></label>
                     </div> {# Email #}
                     <div class="mb-3 form-floating">
 						{% if not oView.getUserOrders()  %}
-							<input type="text" class="form-control" id="wdforder" name="wdf[order]" required autocomplete="off" value="{{ smarty.post.wdf.order  }}">
+							<input type="text" class="form-control" id="wdforder" name="wdf[order]" required autocomplete="off" value="{{ wdforder  }}">
 						{% else  %}
 							<select name="wdf[oxorderid]" id="wdforder" class="form-control" required>
 								<option value="">- {{ translate({ ident: "PLEASE_CHOOSE"  }) }} -</option>
 								{% for _order in oView.getUserOrders() %}
-									<option value="{{ _order.oxorder__oxid.value  }}" {% if 1==0  %}selected{% endif %}>
+									<option value="{{ _order.oxorder__oxid.value  }}" {% if _order.oxorder__oxid.value==oxorderid  %}selected{% endif %}>
 										Bestellung Nr.{{ _order.oxorder__oxordernr.value  }} vom {{ _order.oxorder__oxorderdate.value  }}
 									</option>
 								{% endfor %}
@@ -110,7 +146,7 @@
 
 
                 <div class="mb-3 form-floating">
-                    {% if oxcmp_user and oView.getUserOrders() and not smarty.post.wdf.oxorderid   %}
+                    {% if oxcmp_user and oView.getUserOrders() and not oxorderid   %}
                         {# angemeldeter benutzer + hat Bestellungen + noch keine Bestellung ausgewählt#}
                         <div class="alert alert-info text-center" role="alert">Wählen Sie Ihre Bestellung aus der Liste</div>
                     {% elseif oxcmp_user and oView.getUserOrders() and aOrderProducts and aOrderProducts|length >= 1   %}
@@ -179,7 +215,7 @@
                         </div>
                     {% endif %}
 
-                    {% if ( oView.getUserOrders() and smarty.post.wdf.oxorderid ) or not oView.getUserOrders()   %}
+                    {% if ( oView.getUserOrders() and oxorderid ) or not oView.getUserOrders()   %}
                         <div class="row " id="submitError">
                             {% if submitError  %}
                                 <div class="">
@@ -194,7 +230,7 @@
                                 <p class="form-check">
                                     <input type="hidden" name="wdf[datenschutz]" value="0">
                                     <input class="form-check-input" type="checkbox" name="wdf[datenschutz]" value="1" id="datenschutzok" required
-                                           {% if smarty.post.wdf.datenschutz == "1"  %}checked{% endif %}>
+                                           {% if wdfdatenschutz == "1"  %}checked{% endif %}>
                                     <label class="form-check-label" for="datenschutzok">
                                         <b>*</b> Ich habe die <a href="https://oxid7.kleaner.eu/Datenschutz/" target="_blank"><u>Datenschutzbestimmungen</u></a> gelesen und
                                         akzeptiert.
@@ -229,7 +265,7 @@
 					.then(function (response) { return response.text(); })
 					.then(function (result)
 					{
-						document.getElementById("content1").innerHTML = result;
+						document.getElementById("content").innerHTML = result;
 					});
 				}
 			});
@@ -268,7 +304,7 @@
 			{
 				// console.log(result);
 				// <main class="content" id="content1">  2026bene content1 muss als id vorhanden sein!
-				document.getElementById("content1").innerHTML = result;
+				document.getElementById("content").innerHTML = result;
 			});
 		});
 
@@ -276,10 +312,10 @@
 	</script>
     </div>
 {% endcapture  %}
-{% if smarty.post.ajax == "1"  %}
+{% if isAjaxCall == "1"  %}
     {# AJAX-Request: nur den Inhalt zurückgeben, ohne Layout drumherum #}
     {% for _block in oxidBlock_content  %}
-        {{ _block  }}
+        {{ _block|raw  }}
     {% endfor %}
 {% else  %}
     {# normaler Seitenaufruf: in das Shop-Layout einbetten #}
