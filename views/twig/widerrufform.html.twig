@@ -160,8 +160,9 @@
 
                         {% for _orderaarticle in aOrderProducts %}
                             <div class="mb-3 form-floating pt-2">
+								{% set _oxid = _orderaarticle.oxorderarticles__oxid.value %}
                                 {# checkbox + name #}
-                                <div class="checkbox col-12 col-md-5">
+                                <div class="checkbox ">
                                     <h4>
                                         {{ _orderaarticle.oxorderarticles__oxtitle.value  }}
                                         {{ _orderaarticle.oxorderarticles__oxselvariant.value  }}<br/>
