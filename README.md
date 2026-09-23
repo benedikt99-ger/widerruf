@@ -23,12 +23,12 @@ Module is available on packagist. Install it via composer and activate the modul
 But a button in your template (near div class="header-container")
 Example: 
 header.html.twig
-  ...
+```
  {% block layout_header_top %}
 	<div class="menu-widerruf pull-left">
 	   <a class="btn btn-highlight" href="{{ oViewConf.getBaseDir()|raw }}widerruf/">Vertrag widerrufen</a>
 	</div>	
- ...
+```
 
 
 ```
