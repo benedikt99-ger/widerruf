@@ -11,6 +11,4 @@ $aLang = [
     'SHOP_MODULE_widerrufCC' => "weitere CC Empfänger",
     'SHOP_MODULE_widerrufRetoureportal' => "Links zum externen Retouren-Portal (z.B. von DHL)",
     'SHOP_MODULE_widerrufBootstrapVersion' => 'Bootstrap Version des Templates (v3 für Flow oder v4 für Wave)',
-    'SHOP_MODULE_widerrufBootstrapVersion_v3' => 'v3',
-    'SHOP_MODULE_widerrufBootstrapVersion_v4' => 'v4',
 ];
