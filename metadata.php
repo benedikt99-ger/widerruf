@@ -13,7 +13,7 @@ $aModule = [
     'title'       => 'Widerruf Formular für OXID 7',
     'description' => 'Widerruf Formular für OXID 7',
     'thumbnail'   => 'bn_logo.png',
-    'version'     => '0.4.1',
+    'version'     => '0.4.2',
     'author'      => 'Nünemann',
     'url'         => 'https://github.com/benedikt99-ger/widerruf',
     'email'       => 'benedikt@nuenemann.de',
@@ -29,32 +29,26 @@ $aModule = [
     ],	
    'settings' => [
         [
-            'group' => 'WiderrufMain','name' => 'WiderrufSitekey',
-            'type' => 'str','value' => '','position' => 0
+            'group' => 'WiderrufMain','name' => 'WiderrufSitekey','type' => 'str','value' => '','position' => 0
         ],
         [
-            'group' => 'WiderrufMain','name' => 'WiderrufSecret',
-            'type' => 'str','value' => '','position' => 1
+            'group' => 'WiderrufMain','name' => 'WiderrufSecret','type' => 'str','value' => '','position' => 1
         ],
         [
-            'group' => 'WiderrufMain','name' => 'WiderrufReasons',
-            'type' => 'aarr','value' => [
+            'group' => 'WiderrufMain','name' => 'WiderrufReasons','type' => 'aarr','value' => [
                 'small' => 'zu klein',
                 'large' => 'zu groß',
                 'dislike' => 'nicht gefallen'
             ],'position' => 2
         ],
         [
-            'group' => 'WiderrufMain','name' => 'WiderrufEmail',
-            'type' => 'str','value' => '','position' => 3
+            'group' => 'WiderrufMain','name' => 'WiderrufEmail','type' => 'str','value' => '','position' => 3
         ],
         [
-            'group' => 'WiderrufMain','name' => 'WiderrufCC',
-            'type' => 'arr','value' => [],'position' => 4
+            'group' => 'WiderrufMain','name' => 'WiderrufCC','type' => 'arr','value' => [],'position' => 4
         ],
         [
-            'group' => 'WiderrufMain','name' => 'WiderrufRetoureportal',
-            'type' => 'str','value' => '','position' => 5
+            'group' => 'WiderrufMain','name' => 'WiderrufRetoureportal','type' => 'str','value' => '','position' => 5
         ]
     ]
 ];
