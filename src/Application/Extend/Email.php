@@ -2,7 +2,7 @@
 
 namespace nuenemann\widerruf\Application\Extend;
 
-use \OxidEsales\Eshop\Core\Registry;
+use OxidEsales\Eshop\Core\Registry;
 use OxidEsales\EshopCommunity\Internal\Framework\Templating\TemplateRendererBridgeInterface;
 
 class Email extends Email_parent
@@ -21,6 +21,8 @@ class Email extends Email_parent
 
             $this->setSubject("Widerruf Ihrer Bestellung bei ".$oShop->oxshops__oxname->getRawValue());
             $this->setRecipient($wdf["email"], $wdf["name"]);
+			$sLogfile = Registry::getConfig()->getLogsDir() .'bn.log';
+			file_put_contents($sLogfile, trim(date('Y-m-d H:i:s')." sendWithdrawalRequest toUser ".$wdf["email"]).PHP_EOL,FILE_APPEND);
             $this->setFrom($oShop->oxshops__oxorderemail->value, $oShop->oxshops__oxname->getRawValue());
             if ($sWithdrawalEmail = Registry::getConfig()->getConfigParam("WiderrufEmail")) {
                 $this->setReplyTo($sWithdrawalEmail);
@@ -31,8 +33,12 @@ class Email extends Email_parent
 
             $this->setSubject(" Widerruf einer Bestellung bei ".$oShop->oxshops__oxname->getRawValue());
             if ($_recipient = Registry::getConfig()->getConfigParam("WiderrufEmail")) {
+				$sLogfile = Registry::getConfig()->getLogsDir() .'bn.log';
+				file_put_contents($sLogfile, trim(date('Y-m-d H:i:s')." sendWithdrawalRequest WiderrufEmail ".$_recipient).PHP_EOL,FILE_APPEND);											
                 $this->setRecipient($_recipient);
             } else {
+				$sLogfile = Registry::getConfig()->getLogsDir() .'bn.log';
+				file_put_contents($sLogfile, trim(date('Y-m-d H:i:s')." sendWithdrawalRequest toOwner ".$oShop->oxshops__oxorderemail->value).PHP_EOL,FILE_APPEND);							
                 $this->setRecipient($oShop->oxshops__oxorderemail->value, $oShop->oxshops__oxname->getRawValue());
             }
             if (!empty(Registry::getConfig()->getConfigParam("WiderrufCC"))) {
@@ -40,7 +46,7 @@ class Email extends Email_parent
                     $this->addOrEnqueueAnAddress('cc', $_ccrecipient, '');
                 }
             }
-            $this->setFrom($wdf->email, $wdf->name);
+            $this->setFrom($oShop->oxshops__oxorderemail->value, $oShop->oxshops__oxname->getRawValue());
         }
 
         $this->setViewData("wdf", $wdf);
