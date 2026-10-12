@@ -161,7 +161,7 @@ class WiderrufController extends FrontendController
             $this->addTplParam("submitError", "DATENSCHUTZ");
             return false;
         };
-
+		$this->_isAjax = 1;
 		// 2026bene kein _checkRecaptcha
         // if (!Registry::getConfig()->getUser() && !$this->_checkRecaptcha(Registry::getRequest()->getRequestEscapedParameter("g-recaptcha-response"))) {
         //     return;
@@ -172,7 +172,7 @@ class WiderrufController extends FrontendController
             $oEmail = oxNew("oxEmail");
 			
 			$sLogfile = Registry::getConfig()->getLogsDir() .'bn.log';
-			file_put_contents($sLogfile, trim(date('Y-m-d H:i:s')." submitWithdrawal $wdf->name ".$wdf->name).PHP_EOL,FILE_APPEND);
+			file_put_contents($sLogfile, trim(date('Y-m-d H:i:s')." submitWithdrawal wdf name ".$wdf["name"]).PHP_EOL,FILE_APPEND);
 			
             $x = $oEmail->sendWithdrawalRequestToOwner($wdf);
             $y = $oEmail->sendWithdrawalRequestToUser($wdf);
