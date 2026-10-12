@@ -10,6 +10,7 @@
 	{% set wdfemail=oView.getWdfPostValue('email')  %}
 	{% set oxorderid=oView.getWdfPostValue('oxorderid')  %}
 	{% set wdfdatenschutz=oView.getWdfPostValue('datenschutz')  %}
+	{% set wdfproducts=oView.getWdfPostValue('products')  %}
 	
 	<div class="container-xxl" id="content">
 		<div class="row bg-white p-4 m-4" >
@@ -186,7 +187,7 @@
                                 </div>
 
                                 {# eigener Grund #}
-                                <div class="col-12 col-md-4">
+                                <div class="">
                                 <textarea name="wdf[products][{{ _oxid  }}][reasons][custom]" class="form-control" rows="{{ oView.getWithdrawalReasons()|default(4)  }}"
                                           placeholder="Warum möchten Sie dieses Produkt zurück geben?"></textarea>
                                 </div>
@@ -203,7 +204,7 @@
                             
                                 <input type="hidden" name="wdf[products][0][return]" value="1">
                                 <textarea name="wdf[products][0][title]" class="form-control" rows="4" placeholder="Produktname (ggf. Artikelnummer), Menge und Preis"
-                                          required>{{ smarty.post.wdf.products[0].title  }}</textarea>
+                                          required>{{ wdfproducts[0].title  }}</textarea>
                             
                         </div>
                         {# Grund #}
@@ -211,7 +212,7 @@
                         <div class="mb-3 form-floating">
                             
                             <textarea name="wdf[products][0][reasons][custom]" class="form-control" rows="{{ oView.getWithdrawalReasons()|default(4)  }}"
-                                      placeholder="Was anderes? Hier können Sie einen anderen Grund angeben">{{ smarty.post.wdf.products[0].reasons.custom  }}</textarea>
+                                      placeholder="Was anderes? Hier können Sie einen anderen Grund angeben">{{ wdfproducts[0].reasons.custom  }}</textarea>
                             
                         </div>
                     {% endif %}
@@ -287,7 +288,7 @@
 			var order   = document.getElementById("wdforder");
 
 			if (!name.value || !street.value || !zipcity.value || !email.value || !order.value)	{
-				document.getElementById("submitError").innerHTML = '<div class="col-12"><div class="alert alert-danger">Bitte füllen Sie alle Pflichtfelder aus.</div></div>';
+				document.getElementById("submitError").innerHTML = '<div class=""><div class="alert alert-danger">Bitte füllen Sie alle Pflichtfelder aus.</div></div>';
 				return false;
 			}
 
